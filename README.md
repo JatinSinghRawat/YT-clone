@@ -1,70 +1,258 @@
-# Getting Started with Create React App
+# 🎥 YouTube Clone (React)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A **basic YouTube Clone** built while completing the **Namaste React Course** to revisit React and strengthen my **fundamentals of React** by building a real-world project.
 
-## Available Scripts
+The main goal of this project was **learning and revision**, focusing on understanding React concepts deeply rather than only replicating the UI.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 🏠 Home Page
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* Displays recommended videos
+* Dynamic video listing using reusable components
+* Responsive video cards
 
-### `npm test`
+### 🔍 Search Functionality
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* Video search support
+* Debounced search for optimization
+* Search suggestions
 
-### `npm run build`
+### 📺 Watch Page
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Play videos using embedded YouTube player
+* Dynamic video title & metadata
+* Channel information
+* Subscriber count formatting (`K`, `M`, `B`)
+* Like count display
+* Share / Like / Dislike UI
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 📝 Video Description
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Expand / collapse description (`Show More / Show Less`)
+* Auto-detect links in descriptions
+* Converts `http` → `https`
+* Clickable links rendered dynamically
 
-### `npm run eject`
+### 💬 Comments Section
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* Fetch comments using **YouTube Data API v3**
+* Displays:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  * User profile image
+  * Username
+  * Comment text
+  * Like count
+* Fallback avatar for missing profile images
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 🎛 Sidebar Navigation
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+* Toggle sidebar
+* Mini menu support
+* Redux-based state management
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🛠 Tech Stack
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Frontend
 
-### Code Splitting
+* **React.js**
+* **React Router DOM**
+* **Redux Toolkit**
+* **Tailwind CSS**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### APIs
 
-### Analyzing the Bundle Size
+* **YouTube Data API v3**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 📚 React Concepts Practiced
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+This project was built mainly to **revisit React** and strengthen my fundamentals.
 
-### Advanced Configuration
+Concepts practiced:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+* Functional Components
+* JSX
+* Props
+* State Management (`useState`)
+* Side Effects (`useEffect`)
+* Conditional Rendering
+* Event Handling
+* React Router
+* Dynamic Routing
+* API Fetching
+* Reusable Components
+* Redux Toolkit
+* Store & Slices
+* State Management
+* Debouncing
+* Component Re-rendering
+* React Performance Concepts
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 📂 Project Structure
 
-### `npm run build` fails to minify
+```txt
+src/
+│── components/
+│   ├── Header
+│   ├── Sidebar
+│   ├── VideoCard
+│   ├── WatchPage
+│
+│── utils/
+│   ├── constants.js
+│   ├── appStore.js
+│   ├── navSlice.js
+│
+│── App.js
+│── index.js
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## ⚙️ Installation & Setup
+
+### 1. Clone the repository
+
+```bash
+git clone <your-repository-url>
+```
+
+### 2. Navigate to the project folder
+
+```bash
+cd youtube-clone
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Create `.env.local` file
+
+Create a `.env.local` file in the **root directory** of the project.
+
+Project structure:
+
+```txt
+youtube-clone/
+│── node_modules/
+│── public/
+│── src/
+│── .env
+│── package.json
+```
+
+Add your YouTube API key:
+
+```.env.local
+REACT_APP_YOUTUBE_API_KEY=YOUR_API_KEY
+
+No spaces,quotes, and semicolons,etc.
+```
+
+### 5. Access `.env` variable
+
+Inside `src/utils/constants.js`:
+
+```js
+export const YOUTUBE_API_KEY =
+  process.env.REACT_APP_YOUTUBE_API_KEY;
+```
+
+---
+
+## 🔑 How to Get YouTube API Key
+
+### Step 1: Open Google Cloud Console
+
+Go to:
+
+https://console.cloud.google.com/
+
+### Step 2: Create a Project
+
+* Click **Select Project**
+* Click **New Project**
+* Create a new project
+
+### Step 3: Enable YouTube Data API v3
+
+* Go to **APIs & Services**
+* Click **Library**
+* Search for:
+
+```txt
+YouTube Data API v3
+```
+
+* Click **Enable**
+
+### Step 4: Generate API Key
+
+* Go to **APIs & Services → Credentials**
+* Click **Create Credentials**
+* Select **API Key**
+
+Copy the generated key.
+
+### Step 5: Paste into `.env`
+
+```env
+REACT_APP_YOUTUBE_API_KEY=YOUR_API_KEY
+```
+
+### Step 6: Restart Development Server
+
+After creating `.env`, restart React server:
+
+```bash
+npm start
+```
+
+or
+
+```bash
+npm run dev
+```
+
+because environment variables load only when the app starts.
+
+---
+
+## 🎯 Purpose of This Project
+
+I created this project to:
+
+* Revisit React concepts
+* Strengthen React fundamentals
+* Practice building a real-world UI
+* Improve understanding of component architecture
+* Learn API integration
+* Practice Redux state management
+
+This project is intentionally **basic and learning-focused**, built to reinforce React concepts rather than production-level scalability.
+
+---
+
+
+## 🙌 Acknowledgement
+
+Built while learning from the **Namaste React Course** by **Akshay Saini**.
+
+A huge focus of this project was understanding concepts deeply and revisiting React fundamentals through practical implementation.
+
+---
+
+## 📜 License
+
+This project is built for **learning and educational purposes**.
