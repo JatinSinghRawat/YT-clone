@@ -137,9 +137,9 @@ cd youtube-clone
 npm install
 ```
 
-### 4. Create `.env` file
+### 4. Create `.env.local` file
 
-Create a `.env` file in the **root directory** of the project.
+Create a `.env.local` file in the **root directory** of the project.
 
 Project structure:
 
@@ -154,7 +154,7 @@ youtube-clone/
 
 Add your YouTube API key:
 
-```env
+```.env.local
 REACT_APP_YOUTUBE_API_KEY=YOUR_API_KEY
 
 No spaces,quotes, and semicolons,etc.
