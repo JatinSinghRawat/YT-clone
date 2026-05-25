@@ -156,6 +156,8 @@ Add your YouTube API key:
 
 ```env
 REACT_APP_YOUTUBE_API_KEY=YOUR_API_KEY
+
+No spaces,quotes, and semicolons,etc.
 ```
 
 ### 5. Access `.env` variable
