@@ -1,12 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import MiniSidebar from './MiniSidebar';
 import { toggleMenu } from '../utils/NavSlice'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { cacheResults } from '../utils/SearchSlice';
 const Head = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const [searchQuery,setSearchQuery] = useState("");
+  const [showSugggestions,setShowSuggestions]  = useState(false);
+  const [suggestQueries,setSuggestedQueries] = useState([]);
+  const cache = useSelector(store => store.search);
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   }
+
+  const getSearchSuggestions = async() => {
+    console.log("API Call - ",searchQuery);
+    const response = await fetch(`http://suggestqueries.google.com/complete/search?client=chrome&ds=yt&q=${searchQuery}`);
+    const data = await response.json();
+    setSuggestedQueries(data[1]);
+    console.log(data[1]);
+    dispatch(cacheResults({
+      [searchQuery]:data[1],
+    }))
+  }
+
+  useEffect(()=>{ 
+    // console.log(searchQuery);
+    if(searchQuery === ""){
+      return;
+    }
+    if(cache[searchQuery]){
+      setSuggestedQueries(cache[searchQuery]);
+      return;
+    }
+    const timer = setTimeout(()=>getSearchSuggestions(),200)
+    return ()=>{
+      clearTimeout(timer);
+    }
+  },[searchQuery])
   return (
     <>
     <div className="fixed w-full h-14 top-0 bg-white grid grid-cols-12 py-2 z-10">
@@ -25,15 +56,39 @@ const Head = () => {
     />
   </div>
 
-  <div className='flex justify-center items-center col-span-8'>
-    <input
-      type="text"
-      className='h-9 border border-gray-300 border-r-0 rounded-l-full w-[60%] focus:outline-none focus:border-blue-400 px-4'
-    />
-    <button className='border border-gray-300 bg-gray-200 rounded-r-full h-9 px-2'>
-      🔍
-    </button>
+
+<div className="relative col-span-8 flex justify-center">
+  <div className="relative w-full max-w-2xl px-2">
+    
+    <div className="flex items-center">
+      <input
+        type="text"
+        className="h-10 w-full border border-gray-300 border-r-0 rounded-l-full px-4 focus:outline-none focus:border-blue-400"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        onFocus={()=>setShowSuggestions(true)}
+        onBlur={()=>setShowSuggestions(false)}
+      />
+
+      <button className="h-10 px-5 bg-gray-200 border border-gray-300 rounded-r-full">
+        🔍
+      </button>
+    </div>
+     {
+      showSugggestions && (
+        <ul className="absolute w-[88%] mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
+          {
+        suggestQueries.slice(0,10).map((s,index)=>{
+          return  <li key={index} className='
+          px-4 py-2 hover:bg-gray-100'>{s}</li>
+            
+        })
+          }
+        </ul>
+      )
+     }
   </div>
+</div>
 
   <img
     src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"

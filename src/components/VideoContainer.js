@@ -5,15 +5,14 @@ import { Link } from 'react-router-dom';
 
 const VideoContainer = () => {
     const [videos,setVideos] = useState([]);
+    // const [changeCheck,setChangeCheck] = useState("Hey, I didn't change");
     const fetchVideos = async () => {
     const response = await fetch(YOUTUBE_VIDEO_URL, {});
     const data = await response.json();
     setVideos(data.items);
   };
-  console.log(
-  "API KEY:",
-  process.env.REACT_APP_YOUTUBE_API_KEY
-);
+// setChangeCheck("Hey, I changed");
+// console.log(changeCheck);
   useEffect(() => {
     fetchVideos();
   }, []);
@@ -23,8 +22,8 @@ const VideoContainer = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
       {videos.length>0?(videos.map((video)=>
-      <Link to={`/watch?v=` + video.id}>
-        <VideoCard key = {video.id} Video = {video}/>
+      <Link key = {video.id}  to={`/watch?v=` + video.id}>
+        <VideoCard Video = {video}/>
       </Link>
     )):(<></>)}
     </div>
