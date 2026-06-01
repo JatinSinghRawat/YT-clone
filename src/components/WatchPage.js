@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import { YOUTUBE_VIDEO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import VideoCard from "./VideoCard";
+import CommentsContainer from "./CommentsContainer";
 const WatchPage = () => {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
@@ -569,53 +570,11 @@ console.log(singleVideo.snippet.description);
     </div>
 
     <div className="w-[560px] mt-6">
-      <h3 className="font-bold text-xl mb-4">
+      {/* <h3 className="font-bold text-xl mb-4">
         {comments.length} Comments
-      </h3>
+      </h3> */}
+      <CommentsContainer/>
 
-      {comments.map((comment) => {
-        const commentData =
-          comment.snippet.topLevelComment
-            .snippet;
-
-        return (
-          <div
-            key={comment.id}
-            className="flex gap-3 mb-6"
-          >
-            <img
-              src={commentData.authorProfileImageUrl?.replace(
-                "http://",
-                "https://"
-              )}
-              alt="profile"
-              className="w-10 h-10 rounded-full"
-              onError={(e) => {
-    e.target.src =
-      "https://cdn-icons-png.flaticon.com/512/149/149071.png";
-  }}
-            />
-
-            <div>
-              <h4 className="font-semibold text-sm">
-                {
-                  commentData.authorDisplayName.slice(1,commentData.authorDisplayName.length)
-                }
-              </h4>
-                {/* textDisplay = formatted HTML from YouTube
-dangerouslySetInnerHTML tells React to interpret HTML tags
-<br> becomes actual line breaks
-links become clickable */}
-              <p className="text-sm break-words"
-              
-              dangerouslySetInnerHTML={{
-    __html: commentData.textDisplay,
-  }}>
-              </p>
-            </div>
-          </div>
-        );
-      })}
     </div>
   </div>
 
@@ -633,6 +592,7 @@ links become clickable */}
       ))}
     </div>
   </div>
+  
 </div>
   );
 };
