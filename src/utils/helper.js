@@ -1,5 +1,5 @@
 //To generate random comment with random name in live chat.
-
+//helper function for random name and random comment.
 var nameList = [
   'Time', 'Past', 'Future', 'Dev',
   'Fly', 'Flying', 'Soar', 'Soaring', 'Power', 'Falling',
