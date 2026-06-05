@@ -1,6 +1,4 @@
-// Source - https://stackoverflow.com/q/54708626
-// Posted by EMILO, modified by community. See post 'Timeline' for change history
-// Retrieved 2026-06-06, License - CC BY-SA 4.0
+//To generate random comment with random name in live chat.
 
 var nameList = [
   'Time', 'Past', 'Future', 'Dev',
