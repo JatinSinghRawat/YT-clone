@@ -40,7 +40,6 @@ const Head = () => {
   };
 
   const getSearchSuggestions = async () => {
-    console.log("API Call - ", searchQuery);
     const response = await fetch(
       `http://suggestqueries.google.com/complete/search?client=chrome&ds=yt&q=${searchQuery}`,
     );

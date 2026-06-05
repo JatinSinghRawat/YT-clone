@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeMiniMenu, openMiniMenu } from "../utils/NavSlice";
 import { useSearchParams } from "react-router-dom";
-import { YOUTUBE_VIDEO_URL } from "../utils/constants";
+import { getYoutubeVideoUrl, YOUTUBE_VIDEO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import VideoCard from "./VideoCard";
 import CommentsContainer from "./CommentsContainer";
+import LiveChat from "./LiveChat";
 const WatchPage = () => {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
@@ -92,7 +93,9 @@ const WatchPage = () => {
     setComments(data.items || []);
   };
   const fetchVideos = async () => {
-      const response = await fetch(YOUTUBE_VIDEO_URL, {});
+      const response = await fetch(
+          getYoutubeVideoUrl("")
+        );
       const data = await response.json();
       setVideos(data.items);
     };
@@ -131,7 +134,7 @@ const WatchPage = () => {
   let filteredVideos = videos.filter(
   (video) => video.id !== queryParams
 );
-console.log(singleVideo.snippet.description);
+
 // Suppose description is:
 
 // const text =
@@ -452,13 +455,13 @@ console.log(singleVideo.snippet.description);
   ));
 };
   return (
-    <div className="flex gap-20 px-6">
+    <div className="flex gap-4 px-6 w-full">
       {/* left Side */}
-  <div className="flex-1 max-w-[900px] mr-[4rem]">
-    <div className="w-[560px]">
+  <div className="flex-1 max-w-full">
+    <div className="w-[700px]">
       <iframe
         className="rounded-xl w-full"
-        height="315"
+        height="415"
         src={`https://www.youtube.com/embed/${queryParams}`}
         title="YouTube video player"
         allowFullScreen
@@ -579,18 +582,21 @@ console.log(singleVideo.snippet.description);
   </div>
 
   {/* Right Side */}
-  <div className="w-[400px]">
+  <div className="w-full">
+    <LiveChat/>
+    <div className="w-full">
     <div className="flex flex-col gap-3">
-      <h4 className="ml-[7rem] font-bold text-gray-500">More for You</h4>
+      <h4 className="mt-3 text-3xl font-bold text-gray-500 text-center">More for You</h4>
       {filteredVideos.map((video) => (
         <Link
           key={video.id}
           to={`/watch?v=${video.id}`}
         >
-          <VideoCard Video={video} />
+          <VideoCard Video={video} watchPage={true} />
         </Link>
       ))}
     </div>
+  </div>
   </div>
   
 </div>

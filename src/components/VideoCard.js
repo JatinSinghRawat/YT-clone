@@ -1,6 +1,6 @@
 import React from 'react'
 
-const VideoCard = ({Video}) => {
+const VideoCard = ({Video, watchPage}) => {
     //cluttered & repeated version
     // const getpublishedAgo = (publishedAt) =>{
     //     let publishedAgo = "";
@@ -84,10 +84,11 @@ const getPublishedAgo = (publishedAt) => {
 };
     const releasedAt = getPublishedAgo(Video.snippet.publishedAt);
     const viewCount = getViews(Video.statistics.viewCount)
+    console.log(Video);
   return (
     <div className='mt-3 cursor-pointer'>
-      <img src={Video.snippet.thumbnails.medium.url} alt="thumbnail"
-      className='rounded-xl'/>
+      <img src={watchPage?Video.snippet.thumbnails.maxres.url:Video.snippet.thumbnails.medium.url} alt="thumbnail"
+      className={`rounded-xl ${watchPage?"w-full":""}`}/>
       <div className='flex flex-col'>
       <h3 className='font-bold leading-snug line-clamp-2'>{Video.snippet.title}</h3>
       <h4 className='text-gray-500'>{Video.snippet.channelTitle}</h4>
